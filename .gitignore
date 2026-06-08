@@ -1,0 +1,21 @@
+# Private data
+data/raw/private/
+data/processed/private/
+
+# Python environments and cache
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Local logs
+*.log
