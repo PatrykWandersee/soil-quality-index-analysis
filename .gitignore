@@ -19,3 +19,7 @@ Thumbs.db
 
 # Local logs
 *.log
+
+# Private outputs
+tables/private/
+figures/private/
