@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.stats import spearmanr
 
+from sqi_utils import build_sqi_scores, get_candidate_sets, load_scoring_rules
+
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 
@@ -14,6 +16,8 @@ DATA_PATH = (
     / "private"
     / "soil_quality_processed_private.csv"
 )
+
+CONFIG_PATH = PROJECT_DIR / "config" / "scoring_rules_mds.csv"
 
 OUTPUT_DATA_PATH = (
     PROJECT_DIR
@@ -30,71 +34,10 @@ TABLE_DIR.mkdir(parents=True, exist_ok=True)
 FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 
 df = pd.read_csv(DATA_PATH)
+scoring_rules = load_scoring_rules(CONFIG_PATH)
+candidate_sets = get_candidate_sets(scoring_rules)
 
 response = "Prod_rel_pct"
-
-candidate_sets = {
-    "MDS11_main": [
-        "MO_g_dm3",
-        "GMea",
-        "Arilsulf",
-        "Ca_Troc_cmolc_Kg",
-        "K_Troc_cmolc_Kg",
-        "Floculacao_pct",
-        "Ds_g_cm3",
-        "PST",
-        "PM1_mg_dm3",
-        "pH",
-        "CE_dS_m",
-    ],
-    "MDS12_sodicity": [
-        "MO_g_dm3",
-        "GMea",
-        "Arilsulf",
-        "Ca_Troc_cmolc_Kg",
-        "K_Troc_cmolc_Kg",
-        "Floculacao_pct",
-        "Ds_g_cm3",
-        "PST",
-        "Na_Troc_cmolc_Kg",
-        "PM1_mg_dm3",
-        "pH",
-        "CE_dS_m",
-    ],
-}
-
-# Conservative exploratory scoring.
-# CE is scored as "less is better" because it represents salinity risk.
-directions = {
-    "MO_g_dm3": "more_is_better",
-    "GMea": "more_is_better",
-    "Arilsulf": "more_is_better",
-    "Ca_Troc_cmolc_Kg": "more_is_better",
-    "K_Troc_cmolc_Kg": "more_is_better",
-    "Floculacao_pct": "more_is_better",
-    "Ds_g_cm3": "less_is_better",
-    "PST": "less_is_better",
-    "Na_Troc_cmolc_Kg": "less_is_better",
-    "PM1_mg_dm3": "more_is_better",
-    "pH": "more_is_better",
-    "CE_dS_m": "less_is_better",
-}
-
-
-def minmax_score(series, direction):
-    minimum = series.min()
-    maximum = series.max()
-
-    if maximum == minimum:
-        return pd.Series(1.0, index=series.index)
-
-    if direction == "more_is_better":
-        return (series - minimum) / (maximum - minimum)
-
-    if direction == "less_is_better":
-        return (maximum - series) / (maximum - minimum)
-
-    raise ValueError(f"Unknown direction: {direction}")
 
 
 def format_p_value(p_value):
@@ -107,18 +50,13 @@ output = df.copy()
 summary_rows = []
 
 for set_name, indicators in candidate_sets.items():
-    score_cols = []
+    scores, sqi_col, score_cols = build_sqi_scores(
+        data=output,
+        scoring_rules=scoring_rules,
+        candidate_set=set_name,
+    )
 
-    for indicator in indicators:
-        score_col = f"{set_name}_{indicator}_score"
-        output[score_col] = minmax_score(
-            output[indicator],
-            directions[indicator],
-        )
-        score_cols.append(score_col)
-
-    sqi_col = f"{set_name}_SQI"
-    output[sqi_col] = output[score_cols].mean(axis=1)
+    output = pd.concat([output, scores], axis=1)
 
     temp = output[[sqi_col, response]].dropna()
     rho, p_value = spearmanr(temp[sqi_col], temp[response])
@@ -126,6 +64,7 @@ for set_name, indicators in candidate_sets.items():
     summary_rows.append(
         {
             "sqi": sqi_col,
+            "candidate_set": set_name,
             "n_indicators": len(indicators),
             "n": temp.shape[0],
             "spearman_rho_with_yield": rho,
@@ -135,11 +74,16 @@ for set_name, indicators in candidate_sets.items():
     )
 
 summary = pd.DataFrame(summary_rows)
-summary.to_csv(TABLE_DIR / "selected_sqi_versions_validation.csv", index=False)
+
+summary.to_csv(
+    TABLE_DIR / "selected_sqi_versions_validation.csv",
+    index=False,
+)
 
 output.to_csv(OUTPUT_DATA_PATH, index=False)
 
 print("\nSelected SQI versions exported.")
+print(f"Scoring rules: {CONFIG_PATH}")
 print(f"Output dataset: {OUTPUT_DATA_PATH}")
 
 print("\nValidation summary:")
@@ -156,7 +100,6 @@ print(
 )
 
 
-# Create individual validation plots
 for _, row in summary.iterrows():
     sqi_col = row["sqi"]
     plot_data = output[[sqi_col, response]].dropna()

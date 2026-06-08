@@ -3,6 +3,8 @@ from pathlib import Path
 import pandas as pd
 from scipy.stats import spearmanr
 
+from sqi_utils import get_candidate_sets, load_scoring_rules
+
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 
@@ -14,6 +16,8 @@ DATA_PATH = (
     / "soil_quality_selected_sqi_versions_private.csv"
 )
 
+CONFIG_PATH = PROJECT_DIR / "config" / "scoring_rules_mds.csv"
+
 OUTPUT_PATH = (
     PROJECT_DIR
     / "tables"
@@ -22,38 +26,10 @@ OUTPUT_PATH = (
 )
 
 df = pd.read_csv(DATA_PATH)
+scoring_rules = load_scoring_rules(CONFIG_PATH)
+candidate_sets = get_candidate_sets(scoring_rules)
 
 response = "Prod_rel_pct"
-
-candidate_sets = {
-    "MDS11_main": [
-        "MO_g_dm3",
-        "GMea",
-        "Arilsulf",
-        "Ca_Troc_cmolc_Kg",
-        "K_Troc_cmolc_Kg",
-        "Floculacao_pct",
-        "Ds_g_cm3",
-        "PST",
-        "PM1_mg_dm3",
-        "pH",
-        "CE_dS_m",
-    ],
-    "MDS12_sodicity": [
-        "MO_g_dm3",
-        "GMea",
-        "Arilsulf",
-        "Ca_Troc_cmolc_Kg",
-        "K_Troc_cmolc_Kg",
-        "Floculacao_pct",
-        "Ds_g_cm3",
-        "PST",
-        "Na_Troc_cmolc_Kg",
-        "PM1_mg_dm3",
-        "pH",
-        "CE_dS_m",
-    ],
-}
 
 
 def spearman_summary(x, y):
@@ -72,7 +48,10 @@ for set_name, indicators in candidate_sets.items():
     sqi_col = f"{set_name}_SQI"
 
     if sqi_col not in df.columns:
-        raise ValueError(f"SQI column not found: {sqi_col}")
+        raise ValueError(
+            f"SQI column not found: {sqi_col}. "
+            "Run scripts/11_export_selected_sqi_versions.py first."
+        )
 
     score_cols = {
         indicator: f"{set_name}_{indicator}_score"
@@ -146,6 +125,7 @@ diagnostics = diagnostics.sort_values(
 diagnostics.to_csv(OUTPUT_PATH, index=False)
 
 print("\nSQI component diagnostics completed.")
+print(f"Scoring rules: {CONFIG_PATH}")
 print(f"Output file: {OUTPUT_PATH}")
 
 for set_name in candidate_sets:
