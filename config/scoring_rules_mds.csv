@@ -1,24 +1,35 @@
-candidate_set,indicator,domain,scoring_direction,scoring_method,main_role,notes
-MDS11_main,MO_g_dm3,organic matter,more_is_better,linear_minmax,main,Soil organic matter is treated as beneficial for soil quality within the observed range.
-MDS11_main,GMea,biological,more_is_better,linear_minmax,main,Integrated enzyme activity indicator retained as a main biological indicator.
-MDS11_main,Arilsulf,biological,more_is_better,linear_minmax,main,Arylsulfatase activity retained as a complementary biological indicator.
-MDS11_main,Ca_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,main,Exchangeable calcium represents base fertility status.
-MDS11_main,K_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,main,Exchangeable potassium represents plant nutrient availability.
-MDS11_main,Floculacao_pct,physical structure,more_is_better,linear_minmax,main,Clay flocculation is treated as beneficial for structural stability.
-MDS11_main,Ds_g_cm3,physical structure,less_is_better,linear_minmax,main,Bulk density is treated as a physical restriction indicator.
-MDS11_main,PST,sodicity,less_is_better,linear_minmax,main,Exchangeable sodium percentage is retained as the main sodicity indicator.
-MDS11_main,PM1_mg_dm3,chemical fertility,more_is_better,linear_minmax,main,Mehlich-1 P retained because clay normalization did not improve initial association with yield.
-MDS11_main,pH,chemical reaction,more_is_better,linear_minmax,main,Current exploratory scoring treats higher pH as beneficial within the observed range.
-MDS11_main,CE_dS_m,salinity,less_is_better,linear_minmax,main,Electrical conductivity is scored conservatively as salinity risk despite its possible fertility-proxy behavior at low observed values.
-MDS12_sodicity,MO_g_dm3,organic matter,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,GMea,biological,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,Arilsulf,biological,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,Ca_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,K_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,Floculacao_pct,physical structure,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,Ds_g_cm3,physical structure,less_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,PST,sodicity,less_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,Na_Troc_cmolc_Kg,sodicity,less_is_better,linear_minmax,sensitivity,Exchangeable sodium is included only in the sodicity-expanded sensitivity set.
-MDS12_sodicity,PM1_mg_dm3,chemical fertility,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,pH,chemical reaction,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
-MDS12_sodicity,CE_dS_m,salinity,less_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.
+candidate_set,indicator,domain,scoring_direction,scoring_method,optimum_low,optimum_high,main_role,notes
+MDS11_main,MO_g_dm3,organic matter,more_is_better,linear_minmax,main,Soil organic matter is treated as beneficial for soil quality within the observed range.,,
+MDS11_main,GMea,biological,more_is_better,linear_minmax,main,Integrated enzyme activity indicator retained as a main biological indicator.,,
+MDS11_main,Arilsulf,biological,more_is_better,linear_minmax,main,Arylsulfatase activity retained as a complementary biological indicator.,,
+MDS11_main,Ca_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,main,Exchangeable calcium represents base fertility status.,,
+MDS11_main,K_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,main,Exchangeable potassium represents plant nutrient availability.,,
+MDS11_main,Floculacao_pct,physical structure,more_is_better,linear_minmax,main,Clay flocculation is treated as beneficial for structural stability.,,
+MDS11_main,Ds_g_cm3,physical structure,less_is_better,linear_minmax,main,Bulk density is treated as a physical restriction indicator.,,
+MDS11_main,PST,sodicity,less_is_better,linear_minmax,main,Exchangeable sodium percentage is retained as the main sodicity indicator.,,
+MDS11_main,PM1_mg_dm3,chemical fertility,more_is_better,linear_minmax,main,Mehlich-1 P retained because clay normalization did not improve initial association with yield.,,
+MDS11_main,pH,chemical reaction,more_is_better,linear_minmax,main,Current exploratory scoring treats higher pH as beneficial within the observed range.,,
+MDS11_main,CE_dS_m,salinity,less_is_better,linear_minmax,main,Electrical conductivity is scored conservatively as salinity risk despite its possible fertility-proxy behavior at low observed values.,,
+MDS12_sodicity,MO_g_dm3,organic matter,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,GMea,biological,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,Arilsulf,biological,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,Ca_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,K_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,Floculacao_pct,physical structure,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,Ds_g_cm3,physical structure,less_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,PST,sodicity,less_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,Na_Troc_cmolc_Kg,sodicity,less_is_better,linear_minmax,sensitivity,Exchangeable sodium is included only in the sodicity-expanded sensitivity set.,,
+MDS12_sodicity,PM1_mg_dm3,chemical fertility,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,pH,chemical reaction,more_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS12_sodicity,CE_dS_m,salinity,less_is_better,linear_minmax,sensitivity,Same scoring rule as MDS11_main.,,
+MDS11_pH_optimum,MO_g_dm3,organic matter,more_is_better,linear_minmax,main,Soil organic matter is treated as beneficial for soil quality within the observed range.,sensitivity,
+MDS11_pH_optimum,GMea,biological,more_is_better,linear_minmax,main,Integrated enzyme activity indicator retained as a main biological indicator.,sensitivity,
+MDS11_pH_optimum,Arilsulf,biological,more_is_better,linear_minmax,main,Arylsulfatase activity retained as a complementary biological indicator.,sensitivity,
+MDS11_pH_optimum,Ca_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,main,Exchangeable calcium represents base fertility status.,sensitivity,
+MDS11_pH_optimum,K_Troc_cmolc_Kg,chemical fertility,more_is_better,linear_minmax,main,Exchangeable potassium represents plant nutrient availability.,sensitivity,
+MDS11_pH_optimum,Floculacao_pct,physical structure,more_is_better,linear_minmax,main,Clay flocculation is treated as beneficial for structural stability.,sensitivity,
+MDS11_pH_optimum,Ds_g_cm3,physical structure,less_is_better,linear_minmax,main,Bulk density is treated as a physical restriction indicator.,sensitivity,
+MDS11_pH_optimum,PST,sodicity,less_is_better,linear_minmax,main,Exchangeable sodium percentage is retained as the main sodicity indicator.,sensitivity,
+MDS11_pH_optimum,PM1_mg_dm3,chemical fertility,more_is_better,linear_minmax,main,Mehlich-1 P retained because clay normalization did not improve initial association with yield.,sensitivity,
+MDS11_pH_optimum,pH,chemical reaction,more_is_better,optimum_range,6.5,7.5,sensitivity,"pH is scored using an optimum-range sensitivity function, with full score between 6.5 and 7.5."
+MDS11_pH_optimum,CE_dS_m,salinity,less_is_better,linear_minmax,main,Electrical conductivity is scored conservatively as salinity risk despite its possible fertility-proxy behavior at low observed values.,sensitivity,

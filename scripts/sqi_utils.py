@@ -9,6 +9,8 @@ REQUIRED_COLUMNS = [
     "domain",
     "scoring_direction",
     "scoring_method",
+    "optimum_low",
+    "optimum_high",
     "main_role",
     "notes",
 ]
@@ -72,6 +74,33 @@ def minmax_score(series, direction):
     raise ValueError(f"Unknown scoring direction: {direction}")
 
 
+def optimum_range_score(series, optimum_low, optimum_high):
+    observed_min = series.min()
+    observed_max = series.max()
+
+    score = pd.Series(index=series.index, dtype=float)
+
+    score[(series >= optimum_low) & (series <= optimum_high)] = 1.0
+
+    below = series < optimum_low
+    if optimum_low == observed_min:
+        score[below] = 1.0
+    else:
+        score[below] = (series[below] - observed_min) / (
+            optimum_low - observed_min
+        )
+
+    above = series > optimum_high
+    if observed_max == optimum_high:
+        score[above] = 1.0
+    else:
+        score[above] = (observed_max - series[above]) / (
+            observed_max - optimum_high
+        )
+
+    return score.clip(lower=0, upper=1)
+
+
 def build_sqi_scores(data, scoring_rules, candidate_set):
     set_rules = scoring_rules[
         scoring_rules["candidate_set"] == candidate_set
@@ -91,17 +120,33 @@ def build_sqi_scores(data, scoring_rules, candidate_set):
         if indicator not in data.columns:
             raise ValueError(f"Indicator not found in dataset: {indicator}")
 
-        if scoring_method != "linear_minmax":
+        score_col = f"{candidate_set}_{indicator}_score"
+
+        if scoring_method == "linear_minmax":
+            scores[score_col] = minmax_score(
+                data[indicator],
+                scoring_direction,
+            )
+
+        elif scoring_method == "optimum_range":
+            optimum_low = row["optimum_low"]
+            optimum_high = row["optimum_high"]
+
+            if pd.isna(optimum_low) or pd.isna(optimum_high):
+                raise ValueError(
+                    f"Missing optimum range values for indicator: {indicator}"
+                )
+
+            scores[score_col] = optimum_range_score(
+                data[indicator],
+                optimum_low=float(optimum_low),
+                optimum_high=float(optimum_high),
+            )
+
+        else:
             raise ValueError(
                 f"Unsupported scoring method for {indicator}: {scoring_method}"
             )
-
-        score_col = f"{candidate_set}_{indicator}_score"
-
-        scores[score_col] = minmax_score(
-            data[indicator],
-            scoring_direction,
-        )
 
         score_columns.append(score_col)
 
