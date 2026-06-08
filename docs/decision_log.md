@@ -27,3 +27,9 @@ Two SQI candidate sets were retained:
 In the original thesis interpretation, `CE_dS_m` behaved partly as a fertility proxy because observed salinity levels were low. However, for SQI scoring, `CE_dS_m` was treated conservatively as a "less is better" indicator because elevated electrical conductivity represents salinity risk in irrigated systems.
 
 Decision: use the conservative CE scoring direction in the main preliminary SQI. Retain data-driven scoring only as sensitivity analysis.
+
+## 2026-06-08 — Organic matter instead of calculated organic carbon
+
+Both soil organic matter (`MO_g_dm3`) and calculated organic carbon (`C_org_g_d3`) were available in the dataset. `MO_g_dm3` was retained as the main indicator because it was directly measured, whereas `C_org_g_d3` was calculated from organic matter.
+
+Decision: use `MO_g_dm3` in the MDS and treat `C_org_g_d3` as a derived redundant variable.
