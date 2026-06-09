@@ -33,3 +33,14 @@ Decision: use the conservative CE scoring direction in the main preliminary SQI.
 Both soil organic matter (`MO_g_dm3`) and calculated organic carbon (`C_org_g_d3`) were available in the dataset. `MO_g_dm3` was retained as the main indicator because it was directly measured, whereas `C_org_g_d3` was calculated from organic matter.
 
 Decision: use `MO_g_dm3` in the MDS and treat `C_org_g_d3` as a derived redundant variable.
+## 2026-06-09 – pH optimum-range sensitivity scoring
+
+An additional sensitivity candidate set (`MDS11_pH_optimum`) was added to test whether pH should be scored using an optimum-range function instead of the linear scoring rule used in the main SQI version.
+
+In this sensitivity set, pH receives the maximum score within the 6.5–7.5 range, with lower scores assigned to values below or above this interval. This approach was tested because pH has a known agronomic optimum range and does not necessarily behave as a simple "more is better" indicator.
+
+The diagnostic results did not support replacing the main pH scoring rule. The optimum-range version did not improve the SQI relationship with relative yield, and leave-one-out diagnostics indicated that removing the pH component improved SQI performance in this sensitivity set.
+
+Decision: keep `MDS11_main` as the principal SQI version and retain `MDS11_pH_optimum` only as a sensitivity analysis.
+
+Implication: pH scoring remains transparent and data-driven in the main SQI version, while the optimum-range approach is documented as an alternative methodological test.
