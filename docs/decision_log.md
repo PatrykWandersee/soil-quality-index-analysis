@@ -45,3 +45,13 @@ The diagnostic results did not support replacing the main pH scoring rule. The o
 Decision: keep `MDS11_main` as the principal SQI version and retain `MDS11_pH_optimum` only as a sensitivity analysis.
 
 Implication: pH scoring remains transparent and data-driven in the main SQI version, while the optimum-range approach is documented as an alternative methodological test.
+
+## 2026-06-10 – Project scope prioritization
+
+The current repository will remain focused on the Soil Quality Index (SQI) workflow for irrigated mango orchards.
+
+Although the full research context includes additional analyses related to enzyme activity thresholds and phosphorus extractor behavior, these topics will not be expanded within this repository at this stage.
+
+Decision: keep `soil-quality-index-analysis` focused on the SQI article, including indicator screening, PCA/MDS selection, scoring rules, SQI construction, validation, and documentation of methodological decisions.
+
+Implication: enzyme threshold analyses and phosphorus extractor analyses may be developed later as separate repositories or companion projects, instead of being merged into the current SQI workflow.
