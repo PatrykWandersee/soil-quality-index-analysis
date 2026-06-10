@@ -24,7 +24,7 @@ from scipy.stats import linregress, pearsonr, spearmanr
 
 INPUT_PATH = Path("data/processed/private/soil_quality_selected_sqi_versions_private.csv")
 TABLES_DIR = Path("tables/private")
-FIGURES_DIR = Path("figures/private")
+FIGURES_DIR = Path("figures/private/sqi/validation")
 
 RESPONSE_COLUMNS = [
     "Prod_rel_pct",
