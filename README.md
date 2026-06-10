@@ -51,6 +51,7 @@ The workflow is organized as numbered scripts in `scripts/`:
 * `11_export_selected_sqi_versions.py`: exports selected SQI versions;
 * `12_diagnose_sqi_components.py`: evaluates SQI component behavior;
 * `13_summarize_scoring_ranges.py`: summarizes scoring ranges and indicator behavior;
+- `14_validate_sqi_models.py`: validates selected SQI versions against yield response variables;
 * `sqi_utils.py`: contains shared utility functions for scoring and SQI construction.
 
 ## Candidate SQI versions

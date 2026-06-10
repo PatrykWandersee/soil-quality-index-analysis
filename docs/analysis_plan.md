@@ -37,6 +37,7 @@ The current workflow is organized into sequential analytical stages:
 12. export selected SQI versions;
 13. diagnose SQI component behavior;
 14. summarize scoring ranges and indicator behavior.
+15. validate selected SQI versions using association and simple regression diagnostics.
 
 The corresponding scripts are stored in `scripts/` and numbered according to the workflow sequence.
 

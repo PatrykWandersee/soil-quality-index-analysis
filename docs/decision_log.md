@@ -55,3 +55,17 @@ Although the full research context includes additional analyses related to enzym
 Decision: keep `soil-quality-index-analysis` focused on the SQI article, including indicator screening, PCA/MDS selection, scoring rules, SQI construction, validation, and documentation of methodological decisions.
 
 Implication: enzyme threshold analyses and phosphorus extractor analyses may be developed later as separate repositories or companion projects, instead of being merged into the current SQI workflow.
+
+## 2026-06-10 – Preliminary SQI validation diagnostics
+
+A new validation script (`scripts/14_validate_sqi_models.py`) was added to compare selected SQI candidate versions against yield response variables using simple association and regression diagnostics.
+
+The validation table includes Spearman correlation, Pearson correlation, linear regression slope and intercept, R², RMSE, and MAE for each SQI-response combination.
+
+Preliminary results confirmed that `Prod_rel_pct` remains the most useful response variable for SQI validation. Relationships with `Prod_rel_ha_pct` were weak across all candidate SQI versions.
+
+For `Prod_rel_pct`, `MDS12_sodicity_SQI` showed the strongest numerical validation performance, followed closely by `MDS11_pH_optimum_SQI` and `MDS11_main_SQI`. However, the improvement of `MDS12_sodicity_SQI` over `MDS11_main_SQI` remains relatively small.
+
+Decision: retain `MDS11_main` as the principal preliminary SQI version because it is more parsimonious and interpretable, while retaining `MDS12_sodicity` as the main sensitivity version.
+
+Implication: validation results support the current project structure, with one principal SQI version and sensitivity analyses used to evaluate specific methodological alternatives.
