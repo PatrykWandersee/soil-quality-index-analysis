@@ -52,6 +52,7 @@ The workflow is organized as numbered scripts in `scripts/`:
 * `12_diagnose_sqi_components.py`: evaluates SQI component behavior;
 * `13_summarize_scoring_ranges.py`: summarizes scoring ranges and indicator behavior;
 - `14_validate_sqi_models.py`: validates selected SQI versions against yield response variables;
+- `15_validate_sqi_mixed_models.py`: compares simple OLS, farm fixed-effect OLS, and farm random-intercept mixed models for selected SQI versions;
 * `sqi_utils.py`: contains shared utility functions for scoring and SQI construction.
 
 ## Candidate SQI versions
@@ -163,7 +164,7 @@ Planned refinements include:
 * improving reproducibility for users without access to the private dataset;
 * refining scoring functions with agronomic thresholds or independent validation;
 * preparing publication-oriented figures and tables;
-* expanding model validation, including mixed-model approaches.
+* refining farm-structured validation and interpreting boundary or singular mixed-model diagnostics.
 
 ## Author
 
