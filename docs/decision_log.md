@@ -101,3 +101,15 @@ In contrast, `Prod_rel_ha_pct` remained weakly associated with all SQI versions 
 Decision: retain the Experimental group in the main analysis because it represents a meaningful lower-SQI condition and does not artificially drive the SQI-yield relationship.
 
 Implication: `Prod_rel_pct` remains the primary validation response, while `Prod_rel_ha_pct` should be treated as a secondary and structurally confounded response variable.
+
+## 2026-06-14 – Thesis-inspired compact SQI candidate
+
+A compact thesis-inspired SQI candidate (`MDS2_thesis_compact_linear_SQI`) was added to the validation workflow. This candidate uses two indicators: clay-normalized beta-glucosidase (`Beta_por_Argila`) and sum of exchangeable bases (`SB_cmolc_Kg`).
+
+The compact candidate was implemented using the current repository scoring convention, based on linear min-max scoring. Therefore, it is treated as a thesis-inspired compact version within the current workflow, not as an exact reconstruction of the original thesis SQI.
+
+The compact candidate showed strong association with relative yield per plant, but did not outperform the broader `MDS11_main_SQI` or the sodicity-expanded `MDS12_sodicity_SQI` in the current validation workflow.
+
+Decision: retain `MDS11_main` as the principal preliminary SQI version, retain `MDS12_sodicity` as the main sensitivity version, and retain `MDS2_thesis_compact_linear` as a practical compact comparison.
+
+Implication: the compact two-indicator SQI remains useful as an operational reference, but the broader MDS11 version is more defensible as the main integrated SQI in the current manuscript-oriented workflow.
