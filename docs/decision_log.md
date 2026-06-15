@@ -69,3 +69,21 @@ For `Prod_rel_pct`, `MDS12_sodicity_SQI` showed the strongest numerical validati
 Decision: retain `MDS11_main` as the principal preliminary SQI version because it is more parsimonious and interpretable, while retaining `MDS12_sodicity` as the main sensitivity version.
 
 Implication: validation results support the current project structure, with one principal SQI version and sensitivity analyses used to evaluate specific methodological alternatives.
+
+## 2026-06-10 – Farm-structured SQI validation
+
+A farm-structured validation script (`scripts/15_validate_sqi_mixed_models.py`) was added to compare selected SQI versions using three model structures:
+
+- simple OLS;
+- OLS with farm as a fixed effect;
+- mixed linear model with farm as a random intercept.
+
+The simple OLS results favored `MDS12_sodicity_SQI` numerically, indicating that the sodicity-expanded version had the strongest unadjusted relationship with relative yield per plant.
+
+After accounting for farm as a fixed effect, `MDS11_main_SQI` showed the best model performance among the tested SQI versions. This supports the interpretation that the main parsimonious SQI version remains robust when farm-level differences are considered.
+
+The mixed model with farm as a random intercept converged at the boundary, with farm-level variance estimated as zero. Therefore, the random-intercept model is treated as a diagnostic result rather than as the main validation model.
+
+Decision: retain `MDS11_main` as the principal preliminary SQI version and retain `MDS12_sodicity` as the main sensitivity version.
+
+Implication: farm-structured validation reinforces the current project interpretation: the sodicity-expanded SQI is useful for sensitivity analysis, but the simpler main SQI version remains preferable for the primary workflow because of parsimony, interpretability, and performance after accounting for farm-level structure.
