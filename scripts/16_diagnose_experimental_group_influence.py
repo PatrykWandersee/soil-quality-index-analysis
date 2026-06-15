@@ -37,6 +37,7 @@ SQI_COLUMNS = [
     "MDS11_main_SQI",
     "MDS12_sodicity_SQI",
     "MDS11_pH_optimum_SQI",
+    "MDS2_thesis_compact_linear_SQI",
 ]
 
 

@@ -36,14 +36,16 @@ MAIN_RESPONSE = "Prod_rel_pct"
 
 SQI_LABELS = {
     "MDS11_main_SQI": "MDS11 main",
+    "MDS2_thesis_compact_linear_SQI": "MDS2 thesis compact",
     "MDS12_sodicity_SQI": "MDS12 sodicity",
     "MDS11_pH_optimum_SQI": "MDS11 pH optimum",
 }
 
 SQI_ORDER = {
     "MDS11_main_SQI": 1,
-    "MDS12_sodicity_SQI": 2,
-    "MDS11_pH_optimum_SQI": 3,
+    "MDS2_thesis_compact_linear_SQI": 2,
+    "MDS12_sodicity_SQI": 3,
+    "MDS11_pH_optimum_SQI": 4,
 }
 
 
