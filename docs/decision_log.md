@@ -88,7 +88,7 @@ Decision: retain `MDS11_main` as the principal preliminary SQI version and retai
 
 Implication: farm-structured validation reinforces the current project interpretation: the sodicity-expanded SQI is useful for sensitivity analysis, but the simpler main SQI version remains preferable for the primary workflow because of parsimony, interpretability, and performance after accounting for farm-level structure.
 
-## 2026-06-16 – Experimental group influence diagnostics
+## 2026-06-14 – Experimental group influence diagnostics
 
 A diagnostic script (`scripts/16_diagnose_experimental_group_influence.py`) was added to evaluate whether the Experimental group drives the observed relationship between SQI versions and yield response variables.
 
