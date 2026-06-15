@@ -87,3 +87,17 @@ The mixed model with farm as a random intercept converged at the boundary, with 
 Decision: retain `MDS11_main` as the principal preliminary SQI version and retain `MDS12_sodicity` as the main sensitivity version.
 
 Implication: farm-structured validation reinforces the current project interpretation: the sodicity-expanded SQI is useful for sensitivity analysis, but the simpler main SQI version remains preferable for the primary workflow because of parsimony, interpretability, and performance after accounting for farm-level structure.
+
+## 2026-06-16 – Experimental group influence diagnostics
+
+A diagnostic script (`scripts/16_diagnose_experimental_group_influence.py`) was added to evaluate whether the Experimental group drives the observed relationship between SQI versions and yield response variables.
+
+The Experimental group showed lower SQI values and lower relative yield per plant than the commercial farms, placing it near the lower end of the biological and integrated SQI gradients.
+
+However, removing the Experimental group did not substantially change the Spearman correlations between SQI versions and `Prod_rel_pct`. The SQI-yield relationship remained strong and statistically meaningful without this group.
+
+In contrast, `Prod_rel_ha_pct` remained weakly associated with all SQI versions both with and without the Experimental group.
+
+Decision: retain the Experimental group in the main analysis because it represents a meaningful lower-SQI condition and does not artificially drive the SQI-yield relationship.
+
+Implication: `Prod_rel_pct` remains the primary validation response, while `Prod_rel_ha_pct` should be treated as a secondary and structurally confounded response variable.
