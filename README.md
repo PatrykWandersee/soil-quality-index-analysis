@@ -95,7 +95,8 @@ The `docs/` directory contains methodological notes used to track the analytical
 * `analysis_plan.md`: overall analysis plan;
 * `mds_candidate_sets.md`: candidate MDS structure and interpretation;
 * `decision_log.md`: methodological decisions made during development;
-* `scoring_strategy.md`: current scoring rules and planned refinements.
+* `scoring_strategy.md`: current scoring rules and planned refinements;
+* `sqi_candidate_decision_summary.md`: synthesis of the current SQI candidate selection and validation rationale.
 
 ## Project structure
 
