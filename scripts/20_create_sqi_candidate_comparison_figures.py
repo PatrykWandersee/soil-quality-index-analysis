@@ -140,6 +140,51 @@ def create_bar_figure(
     print(f"Created: {pdf_path}")
 
 
+def create_combined_panel(df: pd.DataFrame) -> None:
+    """Create a 2 x 2 panel comparing all validation metrics."""
+    fig, axes = plt.subplots(2, 2, figsize=(11.0, 7.5))
+    axes = axes.flatten()
+
+    candidates = df["SQI candidate"].tolist()
+    y_positions = range(len(candidates))
+
+    for ax, metric in zip(axes, METRICS):
+        column = metric["column"]
+        label = metric["label"]
+        values = df[column].tolist()
+
+        ax.barh(y_positions, values)
+        ax.set_yticks(y_positions)
+        ax.set_yticklabels(candidates)
+        ax.invert_yaxis()
+        ax.set_xlim(*metric["xlim"])
+        ax.set_xlabel(label)
+        ax.set_title(label)
+
+        for y_position, value in zip(y_positions, values):
+            if pd.notna(value):
+                ax.text(
+                    value + 0.01,
+                    y_position,
+                    f"{value:.3f}",
+                    va="center",
+                )
+
+    fig.suptitle("SQI candidate comparison", y=1.02)
+    fig.tight_layout()
+
+    png_path = OUTPUT_DIR / "sqi_candidate_comparison_panel.png"
+    pdf_path = OUTPUT_DIR / "sqi_candidate_comparison_panel.pdf"
+
+    fig.savefig(png_path, dpi=300, bbox_inches="tight")
+    fig.savefig(pdf_path, bbox_inches="tight")
+
+    plt.close(fig)
+
+    print(f"Created: {png_path}")
+    print(f"Created: {pdf_path}")
+
+
 def main() -> None:
     """Create SQI candidate comparison figures."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -155,6 +200,8 @@ def main() -> None:
             output_stem=metric["file_stem"],
             xlim=metric["xlim"],
         )
+
+    create_combined_panel(df)
 
     print()
     print("SQI candidate comparison figures created.")
