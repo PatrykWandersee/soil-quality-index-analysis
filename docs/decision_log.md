@@ -113,3 +113,25 @@ The compact candidate showed strong association with relative yield per plant, b
 Decision: retain `MDS11_main` as the principal preliminary SQI version, retain `MDS12_sodicity` as the main sensitivity version, and retain `MDS2_thesis_compact_linear` as a practical compact comparison.
 
 Implication: the compact two-indicator SQI remains useful as an operational reference, but the broader MDS11 version is more defensible as the main integrated SQI in the current manuscript-oriented workflow.
+
+## 2026-06-16 – Electrical conductivity scoring sensitivity
+
+Electrical conductivity (`CE_dS_m`) was originally retained in `MDS11_main_SQI` and scored as `less_is_better`, because CE can represent salinity risk in irrigated semiarid soils.
+
+However, within the observed data range, CE behaved ambiguously. Higher CE values were associated with higher relative yield, probably reflecting soluble fertility, fertigation intensity, or general management level rather than harmful salinity. Because the observed CE range was low to moderate, the data do not support interpreting increasing CE as universally beneficial, nor do they allow a reliable optimum range to be defined.
+
+A formal CE scoring sensitivity analysis was added in `scripts/21_check_ce_scoring_sensitivity.py`. The analysis compared the current `MDS11_main_SQI`, a version without CE, versions with CE scored as `more_is_better`, and sodicity-oriented variants with and without CE.
+
+Main result:
+
+* Removing CE from the principal MDS improved the validation balance.
+* `MDS10_without_CE_SQI` outperformed the previous `MDS11_main_SQI` across simple validation, RMSE, farm fixed-effect R², and AIC.
+* CE scored as `more_is_better` also improved simple validation, but this scoring direction was not selected as the principal approach because it is not agronomically transferable beyond the observed low-to-moderate CE range.
+* A sodicity-oriented version without CE, combining the CE-free main MDS with exchangeable sodium, also performed well and should be considered as the main salinity/sodicity sensitivity candidate.
+
+Working decision:
+
+* Revise the principal SQI candidate from `MDS11_main_SQI` to `MDS10_without_CE_SQI`.
+* Treat CE as an ambiguous indicator in this data set, not as a principal SQI component.
+* Retain CE scoring sensitivity as methodological evidence.
+* Evaluate a CE-free sodicity sensitivity candidate as the main salinity/sodicity comparison.

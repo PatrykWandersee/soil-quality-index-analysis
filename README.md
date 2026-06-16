@@ -58,6 +58,7 @@ The workflow is organized as numbered scripts in `scripts/`:
 * `18_create_manuscript_validation_figure.py`: creates a manuscript-oriented validation figure for the main SQI version;
 * `19_build_thesis_compact_sqi.py`: builds and validates a compact thesis-inspired SQI candidate using clay-normalized beta-glucosidase and sum of exchangeable bases;
 * `20_create_sqi_candidate_comparison_figures.py`: creates manuscript-oriented comparison figures for SQI candidates across validation metrics;
+* `21_check_ce_scoring_sensitivity.py`: evaluates electrical conductivity retention and scoring-direction sensitivity in SQI candidates;
 * `sqi_utils.py`: contains shared utility functions for scoring and SQI construction.
 
 ## Candidate SQI versions
