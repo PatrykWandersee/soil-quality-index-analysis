@@ -74,8 +74,15 @@ def main() -> None:
     ax.set_xlabel("Soil Quality Index (MDS11 main)")
     ax.set_ylabel("Relative yield per plant (%)")
 
+    slope_sign = "+" if linear_model.slope >= 0 else "-"
+    equation = (
+        f"y = {linear_model.intercept:.2f} "
+        f"{slope_sign} {abs(linear_model.slope):.2f} × SQI"
+    )
+
     annotation = (
         f"n = {len(data)}\n"
+        f"{equation}\n"
         f"Spearman ρ = {spearman_rho:.3f}\n"
         f"p {format_p_value(spearman_p)}\n"
         f"R² = {linear_model.rvalue**2:.3f}"
