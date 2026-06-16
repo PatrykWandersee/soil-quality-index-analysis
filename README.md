@@ -55,7 +55,8 @@ The workflow is organized as numbered scripts in `scripts/`:
 * `15_validate_sqi_mixed_models.py`: compares simple OLS, farm fixed-effect OLS, and farm random-intercept mixed models for selected SQI versions;
 * `16_diagnose_experimental_group_influence.py`: evaluates whether the Experimental group drives SQI-yield validation results;
 * `17_create_manuscript_validation_table.py`: consolidates validation outputs into a manuscript-oriented SQI candidate comparison table;
-* `18_build_thesis_compact_sqi.py`: builds and validates a compact thesis-inspired SQI candidate using clay-normalized beta-glucosidase and sum of exchangeable bases;
+* `18_create_manuscript_validation_figure.py`: creates a manuscript-oriented validation figure for the main SQI version;
+* `19_build_thesis_compact_sqi.py`: builds and validates a compact thesis-inspired SQI candidate using clay-normalized beta-glucosidase and sum of exchangeable bases;
 * `sqi_utils.py`: contains shared utility functions for scoring and SQI construction.
 
 ## Candidate SQI versions
