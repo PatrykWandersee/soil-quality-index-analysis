@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
 
@@ -46,6 +47,45 @@ def format_p_value(p_value):
     return f"p = {p_value:.4f}"
 
 
+def score_less_is_better(series):
+    minimum = series.min()
+    maximum = series.max()
+
+    if np.isclose(maximum, minimum):
+        return pd.Series(np.nan, index=series.index)
+
+    return (maximum - series) / (maximum - minimum)
+
+
+def validate_required_columns(data, columns, context):
+    missing = [column for column in columns if column not in data.columns]
+
+    if missing:
+        missing_text = "\n".join(f"- {column}" for column in missing)
+        raise ValueError(f"Missing columns for {context}:\n{missing_text}")
+
+
+def add_summary_row(output, summary_rows, sqi_col, candidate_set, indicators):
+    temp = output[[sqi_col, response]].dropna()
+    rho, p_value = spearmanr(temp[sqi_col], temp[response])
+
+    summary_rows.append(
+        {
+            "sqi": sqi_col,
+            "candidate_set": candidate_set,
+            "n_indicators": len(indicators),
+            "n": temp.shape[0],
+            "spearman_rho_with_yield": rho,
+            "p_value": p_value,
+            "indicators": "; ".join(indicators),
+        }
+    )
+
+
+def get_score_columns(candidate_set, indicators):
+    return [f"{candidate_set}_{indicator}_score" for indicator in indicators]
+
+
 output = df.copy()
 summary_rows = []
 
@@ -58,20 +98,109 @@ for set_name, indicators in candidate_sets.items():
 
     output = pd.concat([output, scores], axis=1)
 
-    temp = output[[sqi_col, response]].dropna()
-    rho, p_value = spearmanr(temp[sqi_col], temp[response])
-
-    summary_rows.append(
-        {
-            "sqi": sqi_col,
-            "candidate_set": set_name,
-            "n_indicators": len(indicators),
-            "n": temp.shape[0],
-            "spearman_rho_with_yield": rho,
-            "p_value": p_value,
-            "indicators": "; ".join(indicators),
-        }
+    add_summary_row(
+        output=output,
+        summary_rows=summary_rows,
+        sqi_col=sqi_col,
+        candidate_set=set_name,
+        indicators=indicators,
     )
+
+
+# Derived CE-free SQI candidates.
+#
+# CE_dS_m was initially retained because salinity risk is relevant in irrigated
+# semiarid soils. However, within the observed low-to-moderate CE range, higher
+# CE was positively associated with relative yield, probably reflecting soluble
+# fertility or fertigation intensity rather than harmful salinity. Therefore,
+# CE-free candidates are exported for the revised manuscript-oriented workflow.
+
+if "MDS11_main" in candidate_sets:
+    main_indicators = list(candidate_sets["MDS11_main"])
+    main_indicators_without_ce = [
+        indicator for indicator in main_indicators if indicator != "CE_dS_m"
+    ]
+
+    main_score_columns_without_ce = get_score_columns(
+        candidate_set="MDS11_main",
+        indicators=main_indicators_without_ce,
+    )
+
+    validate_required_columns(
+        data=output,
+        columns=main_score_columns_without_ce,
+        context="MDS10_without_CE_SQI",
+    )
+
+    output["MDS10_without_CE_SQI"] = output[main_score_columns_without_ce].mean(
+        axis=1
+    )
+
+    add_summary_row(
+        output=output,
+        summary_rows=summary_rows,
+        sqi_col="MDS10_without_CE_SQI",
+        candidate_set="MDS10_without_CE",
+        indicators=main_indicators_without_ce,
+    )
+
+    validate_required_columns(
+        data=output,
+        columns=["Na_Troc_cmolc_Kg"],
+        context="MDS11_sodicity_without_CE_SQI",
+    )
+
+    output["MDS11_sodicity_without_CE_Na_Troc_cmolc_Kg_score"] = (
+        score_less_is_better(output["Na_Troc_cmolc_Kg"])
+    )
+
+    sodicity_without_ce_score_columns = [
+        *main_score_columns_without_ce,
+        "MDS11_sodicity_without_CE_Na_Troc_cmolc_Kg_score",
+    ]
+
+    output["MDS11_sodicity_without_CE_SQI"] = output[
+        sodicity_without_ce_score_columns
+    ].mean(axis=1)
+
+    add_summary_row(
+        output=output,
+        summary_rows=summary_rows,
+        sqi_col="MDS11_sodicity_without_CE_SQI",
+        candidate_set="MDS11_sodicity_without_CE",
+        indicators=[*main_indicators_without_ce, "Na_Troc_cmolc_Kg"],
+    )
+
+
+if "MDS11_pH_optimum" in candidate_sets:
+    ph_optimum_indicators = list(candidate_sets["MDS11_pH_optimum"])
+    ph_optimum_indicators_without_ce = [
+        indicator for indicator in ph_optimum_indicators if indicator != "CE_dS_m"
+    ]
+
+    ph_optimum_score_columns_without_ce = get_score_columns(
+        candidate_set="MDS11_pH_optimum",
+        indicators=ph_optimum_indicators_without_ce,
+    )
+
+    validate_required_columns(
+        data=output,
+        columns=ph_optimum_score_columns_without_ce,
+        context="MDS10_pH_optimum_without_CE_SQI",
+    )
+
+    output["MDS10_pH_optimum_without_CE_SQI"] = output[
+        ph_optimum_score_columns_without_ce
+    ].mean(axis=1)
+
+    add_summary_row(
+        output=output,
+        summary_rows=summary_rows,
+        sqi_col="MDS10_pH_optimum_without_CE_SQI",
+        candidate_set="MDS10_pH_optimum_without_CE",
+        indicators=ph_optimum_indicators_without_ce,
+    )
+
 
 summary = pd.DataFrame(summary_rows)
 
