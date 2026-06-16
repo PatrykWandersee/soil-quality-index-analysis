@@ -92,3 +92,22 @@ For the manuscript, the main results should prioritize `MDS11_main_SQI`.
 The main validation figure should likely focus on `MDS11_main_SQI` versus `Prod_rel_pct`, supported by a comparison table including all candidate SQI versions.
 
 Additional validation results involving `Prod_rel_ha_pct` and farm-structured models may be presented as supplementary or supporting diagnostics.
+
+## Current SQI candidate decision
+
+The current manuscript-oriented workflow supports `MDS11_main_SQI` as the principal preliminary SQI candidate.
+
+Although `MDS12_sodicity_SQI` showed the strongest simple validation metrics against relative yield per plant, including the highest Spearman correlation and OLS R², its advantage over `MDS11_main_SQI` was small. In contrast, `MDS11_main_SQI` showed the strongest farm fixed-effect model performance and retained high correlation after excluding the Experimental group.
+
+The thesis-inspired compact candidate, `MDS2_thesis_compact_linear_SQI`, was competitive but did not outperform the broader integrated candidates under the current linear scoring workflow. It is therefore retained as a practical compact comparison, not as the principal SQI version.
+
+The pH optimum-range candidate, `MDS11_pH_optimum_SQI`, showed similar simple correlation performance but did not improve the overall validation balance. It is retained as a scoring-rule sensitivity analysis.
+
+Final working decision:
+
+* Principal SQI candidate: `MDS11_main_SQI`
+* Main sensitivity candidate: `MDS12_sodicity_SQI`
+* Practical compact comparison: `MDS2_thesis_compact_linear_SQI`
+* Scoring-rule sensitivity: `MDS11_pH_optimum_SQI`
+
+This decision is based on internal validation using `Prod_rel_pct` as the primary response variable. The area-based response, `Prod_rel_ha_pct`, remains secondary because it is more strongly affected by planting density, orchard structure, and management heterogeneity.
