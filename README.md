@@ -62,13 +62,14 @@ The workflow is organized as numbered scripts in `scripts/`:
 
 ## Candidate SQI versions
 
-The current workflow retains one main SQI candidate set and two sensitivity versions:
+The current workflow compares one principal SQI candidate, two sensitivity candidates, and one compact thesis-inspired candidate:
 
-* `MDS11_main`: principal preliminary SQI version with 11 indicators;
-* `MDS12_sodicity`: sensitivity version adding `Na_Troc_cmolc_Kg`;
-* `MDS11_pH_optimum`: sensitivity version testing optimum-range pH scoring.
+* `MDS11_main_SQI`: principal integrated SQI candidate, based on 11 indicators representing organic matter, biological activity, fertility, physical structure, sodicity, phosphorus, pH, and electrical conductivity;
+* `MDS12_sodicity_SQI`: sensitivity candidate that adds exchangeable sodium to the principal MDS structure;
+* `MDS11_pH_optimum_SQI`: sensitivity candidate that applies an optimum-range scoring function for pH;
+* `MDS2_thesis_compact_linear_SQI`: compact thesis-inspired candidate based on clay-normalized beta-glucosidase and sum of exchangeable bases, implemented using the current linear min-max scoring convention.
 
-The main candidate set is retained because it is parsimonious, interpretable, and maintains a strong association with relative yield. Sensitivity versions are used to evaluate specific methodological alternatives without replacing the main SQI version.
+The current manuscript-oriented decision retains `MDS11_main_SQI` as the principal preliminary SQI candidate, `MDS12_sodicity_SQI` as the main sensitivity candidate, `MDS2_thesis_compact_linear_SQI` as a practical compact comparison, and `MDS11_pH_optimum_SQI` as a scoring-rule sensitivity analysis.
 
 ## Scoring strategy
 
@@ -163,14 +164,11 @@ These decisions are documented in `docs/decision_log.md`.
 
 ## Next steps
 
-Planned refinements include:
-
-* improving public-facing documentation;
-* adding anonymized or simulated example data;
-* improving reproducibility for users without access to the private dataset;
-* refining scoring functions with agronomic thresholds or independent validation;
-* preparing publication-oriented figures and tables;
-* refining farm-structured validation and interpreting boundary or singular mixed-model diagnostics.
+* Refine manuscript-oriented figures and tables;
+* Prepare a clear Methods narrative matching the current reproducible workflow;
+* Draft the Results and Discussion sections for the first manuscript;
+* Add simulated or anonymized example data in the future, after ensuring that no unpublished private data are exposed;
+* Revisit the exact thesis SQI formulation only if needed for a direct methodological comparison.
 
 ## Author
 
