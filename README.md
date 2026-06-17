@@ -164,15 +164,15 @@ Because the original dataset is private and not included in this repository, the
 ## Main methodological notes
 
 Current methodological decisions include:
+  * using relative yield per plant (`Prod_rel_pct`) as the primary response variable;
+  * retaining raw `PM1_mg_dm3` and `GMea` instead of clay-normalized versions in the integrated SQI candidates;
+  * using `MO_g_dm3` instead of calculated organic carbon as the main organic matter indicator;
+  * retaining `PST` as the primary sodicity-risk indicator in the principal SQI;
+  * excluding electrical conductivity (`CE_dS_m`) from the revised principal SQI because its scoring direction was ambiguous within the observed range;
+  * retaining CE-containing SQI versions only as methodological sensitivity comparisons;
+  * keeping pH optimum-range scoring only as a sensitivity analysis.
 
-* using relative yield per plant as the primary response variable;
-* retaining raw `PM1_mg_dm3` and `GMea` instead of clay-normalized versions in the main candidate set;
-* using `MO_g_dm3` instead of calculated organic carbon as the main organic matter indicator;
-* retaining `PST` as the primary sodicity indicator;
-* treating electrical conductivity conservatively as a `less_is_better` indicator;
-* keeping pH optimum-range scoring only as a sensitivity analysis.
-
-These decisions are documented in `docs/decision_log.md`.
+These decisions are documented in `docs/decision_log.md`, `docs/scoring_strategy.md`, and `docs/sqi_candidate_decision_summary.md`.
 
 ## Next steps
 
