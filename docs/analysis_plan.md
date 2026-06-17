@@ -85,7 +85,7 @@ Candidate MDS sets are selected based on:
 * parsimony;
 * preliminary SQI validation behavior.
 
-The current principal candidate set is `MDS11_main`. Sensitivity versions include `MDS12_sodicity` and `MDS11_pH_optimum`.
+The current principal candidate set is `MDS10_without_CE_SQI`. The main salinity/sodicity sensitivity version is `MDS11_sodicity_without_CE_SQI`, the compact comparison is `MDS2_thesis_compact_linear_SQI`, and the pH scoring-rule sensitivity version is `MDS10_pH_optimum_without_CE_SQI`. Previous CE-containing versions are retained only as methodological sensitivity comparisons.
 
 Further details are documented in `docs/mds_candidate_sets.md`.
 

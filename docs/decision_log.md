@@ -42,7 +42,7 @@ In this sensitivity set, pH receives the maximum score within the 6.5–7.5 rang
 
 The diagnostic results did not support replacing the main pH scoring rule. The optimum-range version did not improve the SQI relationship with relative yield, and leave-one-out diagnostics indicated that removing the pH component improved SQI performance in this sensitivity set.
 
-Decision: keep `MDS11_main` as the principal SQI version and retain `MDS11_pH_optimum` only as a sensitivity analysis.
+Historical decision, now superseded: keep `MDS11_main` as the principal SQI version and retain `MDS11_pH_optimum` only as a sensitivity analysis.
 
 Implication: pH scoring remains transparent and data-driven in the main SQI version, while the optimum-range approach is documented as an alternative methodological test.
 
@@ -66,7 +66,7 @@ Preliminary results confirmed that `Prod_rel_pct` remains the most useful respon
 
 For `Prod_rel_pct`, `MDS12_sodicity_SQI` showed the strongest numerical validation performance, followed closely by `MDS11_pH_optimum_SQI` and `MDS11_main_SQI`. However, the improvement of `MDS12_sodicity_SQI` over `MDS11_main_SQI` remains relatively small.
 
-Decision: retain `MDS11_main` as the principal preliminary SQI version because it is more parsimonious and interpretable, while retaining `MDS12_sodicity` as the main sensitivity version.
+Historical decision, now superseded: retain `MDS11_main` as the principal preliminary SQI version because it is more parsimonious and interpretable, while retaining `MDS12_sodicity` as the main sensitivity version.
 
 Implication: validation results support the current project structure, with one principal SQI version and sensitivity analyses used to evaluate specific methodological alternatives.
 
@@ -84,7 +84,7 @@ After accounting for farm as a fixed effect, `MDS11_main_SQI` showed the best mo
 
 The mixed model with farm as a random intercept converged at the boundary, with farm-level variance estimated as zero. Therefore, the random-intercept model is treated as a diagnostic result rather than as the main validation model.
 
-Decision: retain `MDS11_main` as the principal preliminary SQI version and retain `MDS12_sodicity` as the main sensitivity version.
+Historical decision, now superseded: retain `MDS11_main` as the principal preliminary SQI version and retain `MDS12_sodicity` as the main sensitivity version.
 
 Implication: farm-structured validation reinforces the current project interpretation: the sodicity-expanded SQI is useful for sensitivity analysis, but the simpler main SQI version remains preferable for the primary workflow because of parsimony, interpretability, and performance after accounting for farm-level structure.
 
@@ -110,7 +110,7 @@ The compact candidate was implemented using the current repository scoring conve
 
 The compact candidate showed strong association with relative yield per plant, but did not outperform the broader `MDS11_main_SQI` or the sodicity-expanded `MDS12_sodicity_SQI` in the current validation workflow.
 
-Decision: retain `MDS11_main` as the principal preliminary SQI version, retain `MDS12_sodicity` as the main sensitivity version, and retain `MDS2_thesis_compact_linear` as a practical compact comparison.
+Historical decision, now superseded: retain `MDS11_main` as the principal preliminary SQI version, retain `MDS12_sodicity` as the main sensitivity version, and retain `MDS2_thesis_compact_linear` as a practical compact comparison.
 
 Implication: the compact two-indicator SQI remains useful as an operational reference, but the broader MDS11 version is more defensible as the main integrated SQI in the current manuscript-oriented workflow.
 
