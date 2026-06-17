@@ -43,25 +43,25 @@ METRICS = [
         "column": "Spearman rho",
         "label": "Spearman rho",
         "file_stem": "sqi_candidate_comparison_spearman_rho",
-        "xlim": (0, 0.8),
+        "xlim": (0, 0.85),
     },
     {
         "column": "OLS R²",
         "label": "OLS R²",
         "file_stem": "sqi_candidate_comparison_ols_r2",
-        "xlim": (0, 0.8),
+        "xlim": (0, 0.85),
     },
     {
         "column": "Farm fixed R²",
         "label": "Farm fixed-effect OLS R²",
         "file_stem": "sqi_candidate_comparison_farm_fixed_r2",
-        "xlim": (0, 0.8),
+        "xlim": (0, 0.85),
     },
     {
         "column": "Spearman rho without Experimental",
         "label": "Spearman rho without Experimental",
         "file_stem": "sqi_candidate_comparison_without_experimental",
-        "xlim": (0, 0.8),
+        "xlim": (0, 0.85),
     },
 ]
 
