@@ -1,7 +1,7 @@
 """Diagnose the influence of the Experimental group on SQI validation.
 
 This script evaluates whether the Experimental group drives the relationship
-between preliminary SQI versions and yield response variables.
+between selected and sensitivity SQI versions and yield response variables.
 
 The goal is not to exclude the Experimental group by default, but to document
 whether SQI-yield relationships remain stable when this group is removed.
@@ -34,10 +34,13 @@ RESPONSE_COLUMNS = [
 ]
 
 SQI_COLUMNS = [
+    "MDS10_without_CE_SQI",
+    "MDS11_sodicity_without_CE_SQI",
+    "MDS2_thesis_compact_linear_SQI",
+    "MDS10_pH_optimum_without_CE_SQI",
     "MDS11_main_SQI",
     "MDS12_sodicity_SQI",
     "MDS11_pH_optimum_SQI",
-    "MDS2_thesis_compact_linear_SQI",
 ]
 
 
