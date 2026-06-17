@@ -29,10 +29,13 @@ INPUT_PATH = Path("tables/private/sqi_candidate_validation_table.csv")
 OUTPUT_DIR = Path("figures/private/sqi/manuscript")
 
 CANDIDATE_ORDER = [
-    "MDS11 main",
+    "MDS10 without CE",
+    "MDS11 sodicity without CE",
     "MDS2 thesis compact",
-    "MDS12 sodicity",
-    "MDS11 pH optimum",
+    "MDS10 pH optimum without CE",
+    "MDS11 main with CE",
+    "MDS12 sodicity with CE",
+    "MDS11 pH optimum with CE",
 ]
 
 METRICS = [
@@ -100,7 +103,7 @@ def create_bar_figure(
     xlim: tuple[float, float],
 ) -> None:
     """Create one horizontal bar figure for one validation metric."""
-    fig, ax = plt.subplots(figsize=(7.0, 4.2))
+    fig, ax = plt.subplots(figsize=(8.5, 5.8))
 
     candidates = df["SQI candidate"].tolist()
     values = df[metric_column].tolist()
@@ -142,7 +145,7 @@ def create_bar_figure(
 
 def create_combined_panel(df: pd.DataFrame) -> None:
     """Create a 2 x 2 panel comparing all validation metrics."""
-    fig, axes = plt.subplots(2, 2, figsize=(11.0, 7.5))
+    fig, axes = plt.subplots(2, 2, figsize=(13.0, 9.5))
     axes = axes.flatten()
 
     candidates = df["SQI candidate"].tolist()
