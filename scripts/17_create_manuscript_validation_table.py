@@ -33,17 +33,23 @@ OUTPUT_MD = Path("tables/private/sqi_candidate_validation_table.md")
 RESPONSE_VARIABLE = "Prod_rel_pct"
 
 CANDIDATE_LABELS = {
-    "MDS11_main_SQI": "MDS11 main",
+    "MDS10_without_CE_SQI": "MDS10 without CE",
+    "MDS11_sodicity_without_CE_SQI": "MDS11 sodicity without CE",
     "MDS2_thesis_compact_linear_SQI": "MDS2 thesis compact",
-    "MDS12_sodicity_SQI": "MDS12 sodicity",
-    "MDS11_pH_optimum_SQI": "MDS11 pH optimum",
+    "MDS10_pH_optimum_without_CE_SQI": "MDS10 pH optimum without CE",
+    "MDS11_main_SQI": "MDS11 main with CE",
+    "MDS12_sodicity_SQI": "MDS12 sodicity with CE",
+    "MDS11_pH_optimum_SQI": "MDS11 pH optimum with CE",
 }
 
 CANDIDATE_ORDER = {
-    "MDS11_main_SQI": 1,
-    "MDS2_thesis_compact_linear_SQI": 2,
-    "MDS12_sodicity_SQI": 3,
-    "MDS11_pH_optimum_SQI": 4,
+    "MDS10_without_CE_SQI": 1,
+    "MDS11_sodicity_without_CE_SQI": 2,
+    "MDS2_thesis_compact_linear_SQI": 3,
+    "MDS10_pH_optimum_without_CE_SQI": 4,
+    "MDS11_main_SQI": 5,
+    "MDS12_sodicity_SQI": 6,
+    "MDS11_pH_optimum_SQI": 7,
 }
 
 
@@ -160,6 +166,11 @@ def main() -> None:
         "\n\nNote: all validation metrics are based on `Prod_rel_pct`. "
         "The OLS equation represents the simple linear model "
         "`Prod_rel_pct = intercept + slope × SQI`. "
+        "`MDS10_without_CE_SQI` is the revised principal SQI candidate. "
+        "`MDS11_sodicity_without_CE_SQI` is the CE-free salinity/sodicity "
+        "sensitivity candidate. CE-containing versions are retained as "
+        "methodological sensitivity comparisons because CE behaved ambiguously "
+        "within the observed low-to-moderate range. "
         "The mixed random-intercept model is treated as diagnostic when the "
         "farm-level random effect converges at the boundary or is singular.\n"
     )
