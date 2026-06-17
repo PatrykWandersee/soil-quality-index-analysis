@@ -1,4 +1,4 @@
-"""Validate preliminary SQI candidate versions against yield response variables.
+"""Validate selected and sensitivity SQI candidate versions against yield response variables.
 
 This script compares selected Soil Quality Index (SQI) versions using simple
 association and regression diagnostics. It is intended as a preliminary
@@ -32,10 +32,13 @@ RESPONSE_COLUMNS = [
 ]
 
 SQI_COLUMNS = [
+    "MDS10_without_CE_SQI",
+    "MDS11_sodicity_without_CE_SQI",
+    "MDS2_thesis_compact_linear_SQI",
+    "MDS10_pH_optimum_without_CE_SQI",
     "MDS11_main_SQI",
     "MDS12_sodicity_SQI",
     "MDS11_pH_optimum_SQI",
-    "MDS2_thesis_compact_linear_SQI",
 ]
 
 
