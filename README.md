@@ -63,14 +63,25 @@ The workflow is organized as numbered scripts in `scripts/`:
 
 ## Candidate SQI versions
 
-The current workflow compares one principal SQI candidate, two sensitivity candidates, and one compact thesis-inspired candidate:
+The current workflow compares a revised principal SQI candidate, a salinity/sodicity sensitivity candidate, a compact thesis-inspired comparison, a pH scoring-rule sensitivity candidate, and previous CE-containing sensitivity versions.
 
-* `MDS11_main_SQI`: principal integrated SQI candidate, based on 11 indicators representing organic matter, biological activity, fertility, physical structure, sodicity, phosphorus, pH, and electrical conductivity;
-* `MDS12_sodicity_SQI`: sensitivity candidate that adds exchangeable sodium to the principal MDS structure;
-* `MDS11_pH_optimum_SQI`: sensitivity candidate that applies an optimum-range scoring function for pH;
-* `MDS2_thesis_compact_linear_SQI`: compact thesis-inspired candidate based on clay-normalized beta-glucosidase and sum of exchangeable bases, implemented using the current linear min-max scoring convention.
+The current principal candidate is:
 
-The current manuscript-oriented decision retains `MDS11_main_SQI` as the principal preliminary SQI candidate, `MDS12_sodicity_SQI` as the main sensitivity candidate, `MDS2_thesis_compact_linear_SQI` as a practical compact comparison, and `MDS11_pH_optimum_SQI` as a scoring-rule sensitivity analysis.
+* `MDS10_without_CE_SQI`: revised principal integrated SQI candidate, derived from the previous 11-indicator structure but excluding electrical conductivity (`CE_dS_m`) because CE behaved ambiguously within the observed low-to-moderate range.
+
+The main sensitivity and comparison candidates are:
+
+* `MDS11_sodicity_without_CE_SQI`: main salinity/sodicity sensitivity candidate, adding exchangeable sodium to the CE-free principal structure;
+* `MDS2_thesis_compact_linear_SQI`: compact thesis-inspired comparison based on clay-normalized beta-glucosidase and sum of exchangeable bases;
+* `MDS10_pH_optimum_without_CE_SQI`: pH scoring-rule sensitivity candidate using an optimum-range pH score without CE.
+
+Previous CE-containing candidates are retained only as methodological sensitivity comparisons:
+
+* `MDS11_main_SQI`: previous principal candidate with CE scored as `less_is_better`;
+* `MDS12_sodicity_SQI`: previous sodicity-expanded candidate with CE retained;
+* `MDS11_pH_optimum_SQI`: previous pH optimum-range candidate with CE retained.
+
+The current manuscript-oriented decision retains `MDS10_without_CE_SQI` as the principal preliminary SQI candidate, `MDS11_sodicity_without_CE_SQI` as the main salinity/sodicity sensitivity candidate, `MDS2_thesis_compact_linear_SQI` as a practical compact comparison, and `MDS10_pH_optimum_without_CE_SQI` as a scoring-rule sensitivity analysis.
 
 ## Scoring strategy
 
@@ -165,11 +176,12 @@ These decisions are documented in `docs/decision_log.md`.
 
 ## Next steps
 
-* Refine manuscript-oriented figures and tables;
+* Refine manuscript-oriented figures and tables using the CE-free principal SQI candidate;
+* Update the manuscript draft to reflect `MDS10_without_CE_SQI` as the principal candidate;
 * Prepare a clear Methods narrative matching the current reproducible workflow;
-* Draft the Results and Discussion sections for the first manuscript;
+* Draft the Results and Discussion sections for the SQI manuscript;
 * Add simulated or anonymized example data in the future, after ensuring that no unpublished private data are exposed;
-* Revisit the exact thesis SQI formulation only if needed for a direct methodological comparison.
+* Revisit CE-containing candidates only as sensitivity analyses, not as principal SQI versions.
 
 ## Author
 
