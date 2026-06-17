@@ -1,113 +1,151 @@
-# SQI Candidate Decision Summary
+# SQI candidate decision summary
 
-This document summarizes the current methodological decision regarding the preliminary Soil Quality Index (SQI) candidate versions.
+## Purpose
 
-It is intended as a synthesis document connecting the analytical scripts, validation outputs, and methodological decision log.
+This document summarizes the current manuscript-oriented decision regarding Soil Quality Index (SQI) candidate selection, validation, and interpretation.
 
-## Current SQI candidate versions
+The workflow compares integrated, compact, scoring-rule sensitivity, sodicity-oriented, and electrical-conductivity sensitivity SQI candidates for irrigated Palmer mango orchards in the Brazilian semiarid region.
 
-The current workflow retains one principal SQI candidate version and two sensitivity versions:
+## Current principal decision
 
-* `MDS11_main_SQI`: principal preliminary SQI version;
-* `MDS12_sodicity_SQI`: sodicity-expanded sensitivity version;
-* `MDS11_pH_optimum_SQI`: pH scoring sensitivity version.
+The current principal SQI candidate is:
 
-## Principal version: `MDS11_main_SQI`
+`MDS10_without_CE_SQI`
 
-`MDS11_main_SQI` is retained as the principal preliminary SQI version.
+This candidate is derived from the previous `MDS11_main_SQI`, but excludes electrical conductivity (`CE_dS_m`).
 
-This version includes 11 indicators representing organic matter, biological activity, fertility, soil structure, bulk density, sodicity, phosphorus extraction, pH, and electrical conductivity.
+The revised principal candidate is preferred because electrical conductivity behaved ambiguously in the observed data range. Although CE is agronomically relevant in irrigated semiarid soils because it can represent salinity risk, higher CE values in this data set were associated with higher relative yield. This probably reflects soluble fertility, fertigation intensity, or general management level rather than harmful salinity, because the observed CE range was low to moderate.
 
-The main rationale for retaining `MDS11_main_SQI` is that it provides a strong balance between:
+Removing CE improved the validation balance compared with the previous CE-containing principal candidate.
 
-* parsimony;
-* interpretability;
-* agronomic coherence;
-* validation performance;
-* robustness after accounting for farm-level structure.
+## Revised candidate roles
 
-Although it is not always the numerically strongest version in every validation comparison, it remains the most defensible principal SQI version because it avoids adding an extra sodicity indicator with only limited additional contribution.
+### Principal SQI candidate
 
-## Main sensitivity version: `MDS12_sodicity_SQI`
+`MDS10_without_CE_SQI`
 
-`MDS12_sodicity_SQI` is retained as the main sensitivity version.
+This is the revised principal SQI candidate. It retains the multidimensional structure of the main integrated SQI while excluding CE because of its ambiguous interpretation within the observed range.
 
-This version adds `Na_Troc_cmolc_Kg` to the main candidate set. It was retained because exchangeable sodium contributed to PCA structure and did not exceed the high-redundancy threshold with `PST`.
+Main interpretation:
 
-In simple validation against relative yield per plant, `MDS12_sodicity_SQI` showed the strongest numerical performance among the tested SQI versions.
+* strongest overall balance across simple validation, farm fixed-effect validation, and Experimental group sensitivity;
+* avoids assigning an uncertain scoring direction to CE;
+* preserves biological, organic matter, fertility, physical-structure, sodicity, phosphorus, and pH dimensions.
 
-However, after accounting for farm as a fixed effect, `MDS11_main_SQI` showed better model performance. Therefore, the additional contribution of `Na_Troc_cmolc_Kg` is interpreted as useful for sensitivity analysis, but not sufficient to replace the more parsimonious main SQI version.
+### Main salinity/sodicity sensitivity candidate
 
-## Scoring sensitivity version: `MDS11_pH_optimum_SQI`
+`MDS11_sodicity_without_CE_SQI`
 
-`MDS11_pH_optimum_SQI` is retained as a methodological sensitivity analysis.
+This candidate adds exchangeable sodium to the CE-free principal structure.
 
-This version uses the same indicator composition as `MDS11_main_SQI`, but scores pH using an optimum-range function instead of the linear scoring rule used in the main SQI version.
+Main interpretation:
 
-The tested optimum interval was 6.5–7.5.
+* strongest simple validation among the CE-free manuscript candidates;
+* useful as the main salinity/sodicity sensitivity candidate;
+* retains sodicity information through PST and exchangeable sodium, without relying on CE;
+* should be interpreted as a sensitivity candidate rather than as the principal SQI because it adds an extra sodium-related indicator.
 
-Preliminary diagnostics did not support replacing the main pH scoring rule. The optimum-range version did not clearly improve validation behavior and remains a sensitivity test rather than a candidate for the principal SQI version.
+### Practical compact comparison
 
-## Response variable decision
+`MDS2_thesis_compact_linear_SQI`
 
-`Prod_rel_pct` is retained as the primary response variable for SQI validation.
+This candidate is inspired by the compact thesis-oriented SQI structure, using clay-normalized beta-glucosidase and sum of exchangeable bases under the current linear min–max scoring convention.
 
-This response variable showed clearer relationships with soil indicators and candidate SQI versions than `Prod_rel_ha_pct`.
+Main interpretation:
 
-`Prod_rel_ha_pct` is retained as a secondary response variable, but validation results were weak across all SQI candidate versions. This suggests that yield per hectare may be more strongly affected by planting density, orchard structure, or management factors not directly represented in the current SQI.
+* useful as a practical compact comparison;
+* competitive in simple validation;
+* less robust than the integrated CE-free candidates under farm-structured validation and Experimental group sensitivity;
+* should not be treated as the principal SQI candidate in the current manuscript.
 
-## Farm-structured validation
+### pH scoring-rule sensitivity
 
-Farm-structured validation was evaluated using:
+`MDS10_pH_optimum_without_CE_SQI`
 
-* simple OLS;
-* OLS with farm as a fixed effect;
-* mixed linear models with farm as a random intercept.
+This candidate tests an optimum-range pH scoring rule while also excluding CE.
 
-The simple OLS comparison favored `MDS12_sodicity_SQI` numerically.
+Main interpretation:
 
-The OLS model with farm as a fixed effect favored `MDS11_main_SQI`, supporting the interpretation that the main SQI version remains robust when farm-level differences are considered.
+* useful as a scoring-rule sensitivity candidate;
+* shows strong simple validation;
+* does not replace `MDS10_without_CE_SQI` because the main methodological decision should remain more parsimonious and easier to interpret unless the pH scoring rule is explicitly emphasized.
 
-The mixed model with farm as a random intercept converged at the boundary, with farm-level variance estimated as zero. Therefore, the random-intercept mixed model is treated as a diagnostic result rather than as the main validation model.
+### Previous CE-containing candidates
 
-## Current decision
+The previous candidates remain useful as methodological sensitivity comparisons:
 
-The current decision is:
+* `MDS11_main_SQI`: previous principal candidate with CE scored as `less_is_better`;
+* `MDS12_sodicity_SQI`: previous sodicity-expanded candidate with CE retained;
+* `MDS11_pH_optimum_SQI`: previous pH optimum-range sensitivity with CE retained.
 
-* retain `MDS11_main_SQI` as the principal preliminary SQI version;
-* retain `MDS12_sodicity_SQI` as the main sensitivity version;
-* retain `MDS11_pH_optimum_SQI` as a scoring sensitivity version;
-* use `Prod_rel_pct` as the main validation response;
-* treat `Prod_rel_ha_pct` as secondary and weakly associated with the current SQI versions;
-* treat the random-intercept mixed model as diagnostic because of boundary or singular behavior.
+These are no longer treated as the preferred principal candidates.
 
-## Implication for the manuscript
+## Key validation results
 
-For the manuscript, the main results should prioritize `MDS11_main_SQI`.
+All values below use `Prod_rel_pct` as the primary response variable.
 
-`MDS12_sodicity_SQI` should be presented as a sensitivity analysis showing that adding exchangeable sodium produces only limited improvement and does not clearly justify replacing the main parsimonious SQI.
+| SQI candidate                     | Role                                      | Spearman rho | OLS R² | RMSE   | Farm fixed R² | Spearman rho without Experimental |
+| --------------------------------- | ----------------------------------------- | ------------ | ------ | ------ | ------------- | --------------------------------- |
+| `MDS10_without_CE_SQI`            | Principal revised SQI                     | 0.682        | 0.532  | 14.808 | 0.729         | 0.671                             |
+| `MDS11_sodicity_without_CE_SQI`   | Main salinity/sodicity sensitivity        | 0.692        | 0.550  | 14.520 | 0.725         | 0.674                             |
+| `MDS2_thesis_compact_linear_SQI`  | Practical compact comparison              | 0.659        | 0.486  | 15.512 | 0.653         | 0.600                             |
+| `MDS10_pH_optimum_without_CE_SQI` | pH scoring-rule sensitivity               | 0.691        | 0.526  | 14.905 | 0.714         | 0.653                             |
+| `MDS11_main_SQI`                  | Previous CE-containing main candidate     | 0.665        | 0.518  | 15.030 | 0.722         | 0.653                             |
+| `MDS12_sodicity_SQI`              | Previous CE-containing sodicity candidate | 0.680        | 0.533  | 14.788 | 0.716         | 0.669                             |
+| `MDS11_pH_optimum_SQI`            | Previous CE-containing pH sensitivity     | 0.679        | 0.507  | 15.205 | 0.703         | 0.643                             |
 
-`MDS11_pH_optimum_SQI` should be presented as a methodological sensitivity test related to scoring assumptions.
+## Electrical conductivity decision
 
-The main validation figure should likely focus on `MDS11_main_SQI` versus `Prod_rel_pct`, supported by a comparison table including all candidate SQI versions.
+Electrical conductivity (`CE_dS_m`) was initially retained because salinity risk is relevant in irrigated semiarid soils. It was scored as `less_is_better` in the first principal SQI candidate.
 
-Additional validation results involving `Prod_rel_ha_pct` and farm-structured models may be presented as supplementary or supporting diagnostics.
+However, within the observed low-to-moderate CE range, CE showed positive association with relative yield. This does not imply that increasing CE is universally beneficial. It likely reflects soluble fertility, fertigation intensity, or general management level in the sampled orchards.
 
-## Current SQI candidate decision
+A formal sensitivity analysis showed that:
 
-The current manuscript-oriented workflow supports `MDS11_main_SQI` as the principal preliminary SQI candidate.
+* removing CE improved the principal SQI validation balance;
+* scoring CE as `more_is_better` also improved validation, but this empirical direction is not agronomically transferable beyond the observed range;
+* a CE-free sodicity sensitivity candidate performed well when exchangeable sodium was added.
 
-Although `MDS12_sodicity_SQI` showed the strongest simple validation metrics against relative yield per plant, including the highest Spearman correlation and OLS R², its advantage over `MDS11_main_SQI` was small. In contrast, `MDS11_main_SQI` showed the strongest farm fixed-effect model performance and retained high correlation after excluding the Experimental group.
+Therefore, CE is treated as an ambiguous indicator in this data set and is not retained in the revised principal SQI candidate.
 
-The thesis-inspired compact candidate, `MDS2_thesis_compact_linear_SQI`, was competitive but did not outperform the broader integrated candidates under the current linear scoring workflow. It is therefore retained as a practical compact comparison, not as the principal SQI version.
+## Current manuscript-oriented decision
 
-The pH optimum-range candidate, `MDS11_pH_optimum_SQI`, showed similar simple correlation performance but did not improve the overall validation balance. It is retained as a scoring-rule sensitivity analysis.
+The current manuscript-oriented decision is:
 
-Final working decision:
+* Principal SQI candidate: `MDS10_without_CE_SQI`;
+* Main salinity/sodicity sensitivity candidate: `MDS11_sodicity_without_CE_SQI`;
+* Practical compact comparison: `MDS2_thesis_compact_linear_SQI`;
+* pH scoring-rule sensitivity: `MDS10_pH_optimum_without_CE_SQI`;
+* CE-containing versions: retained as methodological sensitivity comparisons, not as principal candidates.
 
-* Principal SQI candidate: `MDS11_main_SQI`
-* Main sensitivity candidate: `MDS12_sodicity_SQI`
-* Practical compact comparison: `MDS2_thesis_compact_linear_SQI`
-* Scoring-rule sensitivity: `MDS11_pH_optimum_SQI`
+## Interpretation for the manuscript
 
-This decision is based on internal validation using `Prod_rel_pct` as the primary response variable. The area-based response, `Prod_rel_ha_pct`, remains secondary because it is more strongly affected by planting density, orchard structure, and management heterogeneity.
+The manuscript should present the CE-free integrated SQI as the principal candidate.
+
+The recommended framing is:
+
+`MDS10_without_CE_SQI` was retained as the principal SQI candidate because it provided the best overall balance between agronomic interpretability, multidimensional soil-quality coverage, internal validation performance, farm-structured validation, and robustness after excluding the Experimental group.
+
+`MDS11_sodicity_without_CE_SQI` should be presented as the main salinity/sodicity sensitivity candidate because it slightly improved simple validation metrics while retaining sodium-related information without relying on the ambiguous CE response.
+
+The compact two-indicator candidate should be retained as a practical comparison, not as the main scientific SQI.
+
+## Statistical caution
+
+All validation is internal to the current data set. The same study system was used for SQI construction, candidate comparison, and validation.
+
+The manuscript should avoid claiming independent external validation.
+
+Preferred terms:
+
+* internal validation;
+* preliminary validation;
+* apparent validation;
+* manuscript-oriented validation.
+
+Avoid:
+
+* externally validated;
+* universal threshold;
+* definitive recommendation;
+* independent predictive validation.
