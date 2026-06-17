@@ -1,7 +1,7 @@
-"""Create a manuscript-oriented validation figure for the main SQI version.
+"""Create a manuscript-oriented validation figure for the main SQI candidate.
 
 This script creates the main candidate figure for SQI validation using the
-principal preliminary SQI version and relative yield per plant.
+current main SQI candidate and relative yield per plant.
 
 Inputs
 ------
@@ -24,7 +24,7 @@ from scipy.stats import linregress, spearmanr
 INPUT_PATH = Path("data/processed/private/soil_quality_selected_sqi_versions_private.csv")
 OUTPUT_DIR = Path("figures/private/sqi/manuscript")
 
-SQI_COLUMN = "MDS11_main_SQI"
+SQI_COLUMN = "MDS10_without_CE_SQI"
 RESPONSE_COLUMN = "Prod_rel_pct"
 
 PNG_OUTPUT = OUTPUT_DIR / "sqi_main_validation_figure.png"
@@ -71,7 +71,7 @@ def main() -> None:
     ax.scatter(x, y, alpha=0.8)
     ax.plot(x_line, y_line)
 
-    ax.set_xlabel("Soil Quality Index (MDS11 main)")
+    ax.set_xlabel("Soil Quality Index (MDS10 without CE)")
     ax.set_ylabel("Relative yield per plant (%)")
 
     slope_sign = "+" if linear_model.slope >= 0 else "-"
