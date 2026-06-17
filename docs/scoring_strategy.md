@@ -1,56 +1,120 @@
-# Scoring Strategy
+# SQI scoring strategy
 
-This document describes the exploratory scoring strategy used to build preliminary soil quality index (SQI) versions.
+## Purpose
 
-## Current scoring configuration
+This document summarizes the scoring strategy used to construct Soil Quality Index (SQI) candidates for irrigated Palmer mango orchards in the Brazilian semiarid region.
 
-SQI scoring rules are defined in `config/scoring_rules_mds.csv` and applied through the shared utility functions in `scripts/sqi_utils.py`.
+The current workflow uses transparent linear min–max scoring to compare SQI candidates and evaluate their internal validation against relative yield per plant.
 
-Each indicator is transformed to a 0–1 score according to its scoring direction and scoring method. The current workflow supports the following scoring directions:
+## General scoring approach
 
-- `more_is_better`: higher observed values receive higher scores;
-- `less_is_better`: lower observed values receive higher scores.
+Each selected soil indicator is transformed into a unitless score ranging from 0 to 1.
 
-The current workflow supports the following scoring methods:
+The general scoring rules are:
 
-- `linear`: linear min-max scoring based on the observed minimum and maximum values;
-- `optimum_range`: sensitivity scoring where values inside a defined optimum interval receive the maximum score and values below or above the interval receive lower scores.
+* `more_is_better`: higher indicator values receive higher scores;
+* `less_is_better`: lower indicator values receive higher scores;
+* `optimum_range`: values inside a predefined optimum interval receive higher scores, while values below or above the interval receive lower scores.
 
-The main SQI versions still rely on linear min-max scoring. The `optimum_range` method is currently used only for sensitivity analysis.
+The main SQI candidates are calculated as the mean of the selected indicator scores.
 
-## Main candidate set
+## Current principal SQI scoring
 
-The main SQI candidate set is `MDS11_main`.
+The current principal SQI candidate is:
 
-It includes 11 indicators representing biological, chemical, physical, salinity, sodicity, and organic matter domains. This set is treated as the principal preliminary SQI version because it is parsimonious, interpretable, and maintains a strong association with relative yield.
+`MDS10_without_CE_SQI`
 
-## Sensitivity candidate sets
+This candidate excludes electrical conductivity (`CE_dS_m`) because CE showed ambiguous interpretation within the observed data range.
 
-Two sensitivity candidate sets are currently retained:
+The principal candidate uses linear min–max scoring for the following indicators:
 
-- `MDS12_sodicity`: adds `Na_Troc_cmolc_Kg` to the main set as a sodicity-expanded sensitivity analysis;
-- `MDS11_pH_optimum`: keeps the same indicators as `MDS11_main`, but scores pH using an optimum-range function.
+| Indicator          | Scoring direction | Interpretation                                                               |
+| ------------------ | ----------------- | ---------------------------------------------------------------------------- |
+| `MO_g_dm3`         | `more_is_better`  | Soil organic matter is treated as beneficial within the observed range.      |
+| `GMea`             | `more_is_better`  | Integrated enzymatic activity is treated as beneficial.                      |
+| `Arilsulf`         | `more_is_better`  | Arylsulfatase activity is treated as beneficial.                             |
+| `Ca_Troc_cmolc_Kg` | `more_is_better`  | Exchangeable calcium represents base fertility status.                       |
+| `K_Troc_cmolc_Kg`  | `more_is_better`  | Exchangeable potassium represents nutrient availability.                     |
+| `Floculacao_pct`   | `more_is_better`  | Clay flocculation is treated as beneficial for structural stability.         |
+| `Ds_g_cm3`         | `less_is_better`  | Bulk density is treated as a physical restriction indicator.                 |
+| `PST`              | `less_is_better`  | Exchangeable sodium percentage is treated as a sodicity-risk indicator.      |
+| `PM1_mg_dm3`       | `more_is_better`  | Mehlich-1 phosphorus is treated as beneficial within the observed range.     |
+| `pH`               | `more_is_better`  | pH is treated linearly in the principal candidate within the observed range. |
 
-The `MDS12_sodicity` version is useful for evaluating whether exchangeable sodium adds information beyond `PST`. Preliminary diagnostics indicate that `Na_Troc_cmolc_Kg` improves SQI validation only marginally.
+## Main salinity/sodicity sensitivity scoring
 
-The `MDS11_pH_optimum` version is useful for evaluating whether pH should be scored as an optimum-range indicator instead of a linear indicator. Preliminary diagnostics did not support replacing the main pH scoring rule with the optimum-range version.
+The main salinity/sodicity sensitivity candidate is:
 
-## Electrical conductivity
+`MDS11_sodicity_without_CE_SQI`
 
-Electrical conductivity (`CE_dS_m`) showed behavior that may partly reflect fertility or ionic concentration under the low salinity range observed in the dataset. However, for SQI scoring, it is treated conservatively as a `less_is_better` indicator because elevated salinity represents a risk in irrigated semiarid systems.
+This candidate uses the same scoring rules as `MDS10_without_CE_SQI`, with the addition of exchangeable sodium:
 
-Alternative data-driven scoring for electrical conductivity may be retained only as sensitivity analysis.
+| Indicator          | Scoring direction | Interpretation                                                           |
+| ------------------ | ----------------- | ------------------------------------------------------------------------ |
+| `Na_Troc_cmolc_Kg` | `less_is_better`  | Exchangeable sodium is treated as an additional sodicity-risk indicator. |
 
-## pH scoring
+This candidate evaluates whether adding exchangeable sodium improves SQI performance without relying on CE.
 
-The main SQI version uses linear scoring for pH. This choice is transparent and reflects the empirical behavior observed in the current dataset.
+## pH optimum-range sensitivity
 
-An additional sensitivity version, `MDS11_pH_optimum`, tests pH scoring with an optimum range of 6.5–7.5. In this version, pH values within the optimum interval receive the maximum score, while values below or above this range receive lower scores.
+The pH scoring-rule sensitivity candidate is:
 
-This optimum-range approach is documented as a methodological test, not as the principal scoring rule.
+`MDS10_pH_optimum_without_CE_SQI`
 
-## Future refinement
+This candidate uses the same indicator structure as `MDS10_without_CE_SQI`, but replaces the linear pH score with an optimum-range pH score.
 
-Future SQI versions may replace simple linear min-max scoring with agronomic scoring functions based on external thresholds, response curves, plateau functions, or independently validated optimum ranges.
+The tested optimum range is:
 
-Such refinements should be introduced only when they are supported by agronomic evidence, independent validation, or clear improvement in model behavior.
+* lower optimum limit: pH 6.5;
+* upper optimum limit: pH 7.5.
+
+This candidate is retained as a scoring-rule sensitivity analysis, not as the principal SQI candidate.
+
+## Compact thesis-inspired scoring
+
+The compact comparison candidate is:
+
+`MDS2_thesis_compact_linear_SQI`
+
+It uses two indicators:
+
+| Indicator         | Scoring direction | Interpretation                                                                  |
+| ----------------- | ----------------- | ------------------------------------------------------------------------------- |
+| `Beta_por_Argila` | `more_is_better`  | Clay-normalized beta-glucosidase is treated as a biological activity indicator. |
+| `SB_cmolc_Kg`     | `more_is_better`  | Sum of exchangeable bases is treated as a fertility indicator.                  |
+
+This candidate is retained as a practical compact comparison with the broader integrated SQI candidates.
+
+## Electrical conductivity decision
+
+Electrical conductivity (`CE_dS_m`) was originally included in the previous principal candidate, `MDS11_main_SQI`, and scored as `less_is_better` because CE can represent salinity risk in irrigated semiarid soils.
+
+However, within the observed low-to-moderate CE range, CE was positively associated with relative yield. This pattern probably reflects soluble fertility, fertigation intensity, or general management level rather than harmful salinity.
+
+The data do not support treating increasing CE as universally beneficial. At the same time, scoring CE as `less_is_better` reduced the validation performance of the principal SQI.
+
+A formal sensitivity analysis showed that:
+
+* removing CE improved the principal SQI validation balance;
+* scoring CE as `more_is_better` improved validation but is not agronomically transferable beyond the observed range;
+* a CE-free sodicity sensitivity candidate performed well when exchangeable sodium was added.
+
+Therefore, CE is not retained in the current principal SQI candidate.
+
+CE-containing candidates remain useful as methodological sensitivity comparisons:
+
+* `MDS11_main_SQI`: previous principal candidate with CE scored as `less_is_better`;
+* `MDS12_sodicity_SQI`: previous sodicity-expanded candidate with CE retained;
+* `MDS11_pH_optimum_SQI`: previous pH optimum-range candidate with CE retained.
+
+## Current interpretation
+
+The current scoring strategy prioritizes:
+
+* transparent scoring rules;
+* agronomic interpretability;
+* avoidance of ambiguous indicator direction;
+* internal validation performance;
+* sensitivity analysis rather than uncritical maximization of model fit.
+
+The revised principal SQI is CE-free because this provides a better balance between data behavior and agronomic transferability.
