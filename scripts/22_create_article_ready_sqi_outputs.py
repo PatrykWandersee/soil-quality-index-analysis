@@ -356,7 +356,7 @@ def create_main_validation_figure() -> None:
         ha="left",
     )
 
-    ax.set_title("Internal validation of the Integrated SQI")
+    ax.set_title("")
 
     fig.tight_layout()
 
@@ -402,7 +402,7 @@ def create_article_candidate_comparison_figure(df: pd.DataFrame) -> None:
                     va="center",
                 )
 
-    fig.suptitle("SQI candidate comparison", y=1.02)
+    fig.suptitle("")
     fig.tight_layout()
 
     png_path = FIGURE_OUTPUT_DIR / "article_candidate_comparison_4_candidates.png"
